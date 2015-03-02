@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\classes-1bbbd5c81127cf02b157b26d8066fc76108d362e.jar" />
+    </item>
+    <item
+        jar="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-19e073caa6bf8aa808ae26ba254c738698be3b8d.jar" />
+    </item>
+    <item
+        jar="C:\Users\waihong\Desktop\NavigationDrawer1\app\src\main\res\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8">
+        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\gson-2.2.4-4851f060fc535df54acc890baf08145635b2ac65.jar" />
+    </item>
+    <item
+        jar="C:\Users\waihong\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-4b6978f2d003441990b3b7ab0cbddfc763f1c36d.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical"
+    android:background="#cca20f0b">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:id="@+id/t1"
+        android:layout_gravity="center_horizontal"
+        android:text="ALERT: your device isn&apos;t fully set up" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:id="@+id/t2"
+        android:layout_gravity="center_horizontal"
+        android:text="ALERT: GPS location deactivated " />
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="405dp"
+        android:id="@+id/imageButton"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        android:src="@drawable/hhh"
+        android:onClick="helpPlease" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Your location is: ....."
+        android:id="@+id/textView" />
+
+</LinearLayout>

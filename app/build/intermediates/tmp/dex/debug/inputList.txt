@@ -1,0 +1,5 @@
+C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\classes\debug
+C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-4b6978f2d003441990b3b7ab0cbddfc763f1c36d.jar
+C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\gson-2.2.4-4851f060fc535df54acc890baf08145635b2ac65.jar
+C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-19e073caa6bf8aa808ae26ba254c738698be3b8d.jar
+C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\classes-1bbbd5c81127cf02b157b26d8066fc76108d362e.jar
