@@ -45,9 +45,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
@@ -87,9 +90,12 @@ public class MainActivity extends Activity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mPlanetTitles;
-    private userSetting userHero =  null;
-    private userSetting userHero22 =  null;
-
+   // private userSetting userHero =  null;
+    private static userSetting userHero22 =  null;
+    static Gson gson = new Gson();
+    static  String json = null;
+    static SharedPreferences.Editor editor = null;
+    // final  SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 
 
     @Override
@@ -103,12 +109,13 @@ public class MainActivity extends Activity {
                 | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
-        userHero =  new userSetting(true,80,null,false,1,"0876140810",null,null);
+       // userHero =  new userSetting(true,80,null,false,1,"0876140810",null,null);
 
-        System.out.println(userHero+"  asdasdasdasdasdasdasdasdas");
+      //  System.out.println(userHero+"  asdasdasdasdasdasdasdasdas");
 
         final  SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-userHero.setShackInvoke(false);
+        /*
+        userHero.setShackInvoke(false);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(userHero);
@@ -122,9 +129,13 @@ userHero.setShackInvoke(false);
         json = prefs.getString("userHero", "");
         userHero22 = gson.fromJson(json, userSetting.class);
 
-        System.out.println(userHero22+"  you mother fucker");
 
+*/
 
+         json = prefs.getString("userHero22", "");
+        userHero22 = gson.fromJson(json, userSetting.class);
+        System.out.println(userHero22+"  testing share prefrence");
+        editor = prefs.edit();
         mTitle = mDrawerTitle = getTitle();
         mPlanetTitles = getResources().getStringArray(R.array.mm_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -466,6 +477,86 @@ userHero.setShackInvoke(false);
             // Inflate the layout for this fragment
             return inflater.inflate(R.layout.shackfragment, container, false);
         }
+        public void onActivityCreated(Bundle savedInstanceState) {
+
+            super.onActivityCreated(savedInstanceState);
+
+            TextView switchStatus;
+            Switch mySwitch;
+            SeekBar seekBar;
+
+            switchStatus = (TextView) getActivity().findViewById(R.id.switch1);
+            mySwitch = (Switch) getActivity().findViewById(R.id.switch1);
+            mySwitch.setChecked(userHero22.isShackInvoke());
+            seekBar = (SeekBar) getActivity().findViewById(R.id.seekBar);
+
+            mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView,
+                                             boolean isChecked) {
+
+                    if(isChecked){
+                        userHero22.setShackInvoke(true);
+                        userHero22 =  new userSetting(true,80,null,false,1,"0876140810",null,null);
+                    }else{
+                        userHero22.setShackInvoke(false);
+                        userHero22 =  new userSetting(false,80,null,false,1,"0876140810",null,null);
+                    }
+                    json = gson.toJson(userHero22);
+                    editor.putString("userHero22", json);
+                    editor.apply();
+
+                    System.out.println(userHero22.toString()+"asdasdasdasd");
+
+
+
+                }
+            });
+
+            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                int progress = 50;
+
+
+
+                @Override
+
+                public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+
+                    progress = progresValue;
+System.out.println("dfsdfsdfsdf 0 " + progresValue);
+
+                }
+
+
+
+                @Override
+
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+
+
+                }
+
+
+
+                @Override
+
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
+
+
+                }
+
+            });
+
+
+        }
+
+
+
+
 
 
 
