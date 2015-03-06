@@ -11,7 +11,7 @@ public class userSetting implements Serializable {
 
 
     public boolean shackInvoke;
-    public double levelOfVibration;
+    public int levelOfVibration;
     public ArrayList<Date> autoInvokeTimes;
     public boolean autoInvoke;
     public int password;
@@ -30,7 +30,7 @@ public class userSetting implements Serializable {
         emailList = new ArrayList<String>();
     }
 
-    public userSetting(boolean shackInvoke, double levelOfVibration, ArrayList<Date> autoInvokeTimes, boolean autoInvoke, int password, String policeNumber, ArrayList<String> SMSList, ArrayList<String> emailList) {
+    public userSetting(boolean shackInvoke, int levelOfVibration, ArrayList<Date> autoInvokeTimes, boolean autoInvoke, int password, String policeNumber, ArrayList<String> SMSList, ArrayList<String> emailList) {
         this.shackInvoke = shackInvoke;
         this.levelOfVibration = levelOfVibration;
         this.autoInvokeTimes = autoInvokeTimes;
@@ -45,7 +45,7 @@ public class userSetting implements Serializable {
         return shackInvoke;
     }
 
-    public double getLevelOfVibration() {
+    public int getLevelOfVibration() {
         return levelOfVibration;
     }
 
@@ -77,7 +77,7 @@ public class userSetting implements Serializable {
         this.shackInvoke = shackInvoke;
     }
 
-    public void setLevelOfVibration(double levelOfVibration) {
+    public void setLevelOfVibration(int levelOfVibration) {
         this.levelOfVibration = levelOfVibration;
     }
 

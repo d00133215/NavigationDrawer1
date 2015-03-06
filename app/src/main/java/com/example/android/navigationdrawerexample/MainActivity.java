@@ -489,6 +489,7 @@ public class MainActivity extends Activity {
             mySwitch = (Switch) getActivity().findViewById(R.id.switch1);
             mySwitch.setChecked(userHero22.isShackInvoke());
             seekBar = (SeekBar) getActivity().findViewById(R.id.seekBar);
+            seekBar.setProgress(userHero22.getLevelOfVibration());
 
             mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -516,7 +517,7 @@ public class MainActivity extends Activity {
 
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-                int progress = 50;
+                int progress = 0;
 
 
 
@@ -525,9 +526,10 @@ public class MainActivity extends Activity {
                 public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
 
                     progress = progresValue;
-System.out.println("dfsdfsdfsdf 0 " + progresValue);
+
 
                 }
+
 
 
 
@@ -544,10 +546,13 @@ System.out.println("dfsdfsdfsdf 0 " + progresValue);
                 @Override
 
                 public void onStopTrackingTouch(SeekBar seekBar) {
-
-
+                    userHero22.setLevelOfVibration(progress);
+                    json = gson.toJson(userHero22);
+                    editor.putString("userHero22", json);
+                    editor.apply();
 
                 }
+
 
             });
 
