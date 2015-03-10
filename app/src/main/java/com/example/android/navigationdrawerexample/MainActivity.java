@@ -17,6 +17,7 @@
 package com.example.android.navigationdrawerexample;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,6 +46,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -91,11 +93,12 @@ public class MainActivity extends Activity {
     private CharSequence mTitle;
     private String[] mPlanetTitles;
    // private userSetting userHero =  null;
-    private static userSetting userHero22 =  null;
+    public static userSetting userHero22 =  null;
     static Gson gson = new Gson();
     static  String json = null;
     static SharedPreferences.Editor editor = null;
     // final  SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+    private static final int ADD_TODO_ITEM_REQUEST = 0;
 
 
     @Override
@@ -132,7 +135,7 @@ public class MainActivity extends Activity {
 
 */
 
-         json = prefs.getString("userHero22", "");
+        json = prefs.getString("userHero22", "");
         userHero22 = gson.fromJson(json, userSetting.class);
         System.out.println(userHero22+"  testing share prefrence");
         editor = prefs.edit();
@@ -359,6 +362,8 @@ public class MainActivity extends Activity {
     }
 
     public static class Fragment2 extends Fragment {
+
+        private TextView mQuoteView = null;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -366,6 +371,18 @@ public class MainActivity extends Activity {
 
             // Inflate the layout for this fragment
             return inflater.inflate(R.layout.fragment_fragment2, container, false);
+        }
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+
+            super.onActivityCreated(savedInstanceState);
+            String aboutUs= "This app is free for use,\nno term and policies,\n" +
+                    "app is created by waihong , siew ";
+
+            mQuoteView=  (TextView) getActivity().findViewById(R.id.aboutUsFragment);
+            mQuoteView.setText(aboutUs);
+
         }
 
 
@@ -379,6 +396,8 @@ public class MainActivity extends Activity {
 
         CustomAdapter adapter;
         private List<RowItem> rowItems;
+
+
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -428,9 +447,60 @@ public class MainActivity extends Activity {
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
             }
+            if(position==2){
+                Fragment fragment = new autoactivateTime();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
+            }
+
+            if(position ==4){
+                Fragment fragment = new emergencyContactDetails();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
+            }
+            if(position ==5 ){
+
+                Fragment fragment = new contactPoliceFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            }
+            if(position ==6 ){
+
+                Fragment fragment = new smsRemoteAccess();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            }
+            if(position ==7 ){
+
+                Fragment fragment = new Fragment4();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            }
 
         }
 
+
+    }
+
+    public static class smsRemoteAccess extends Fragment{
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            return inflater.inflate(R.layout.sms_remote_access_fragment, container, false);
+        }
+
+    }
+
+    public static class contactPoliceFragment extends Fragment{
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            return inflater.inflate(R.layout.contact_fragment, container, false);
+        }
 
     }
     public static class Fragment3 extends Fragment {
@@ -470,7 +540,90 @@ public class MainActivity extends Activity {
         }
     }
 
-    public static class shakeInvokeDeviceFragment extends Fragment {
+    public static class autoactivateTime extends ListFragment implements AdapterView.OnItemClickListener {
+
+        autoAdapter adapterTime;
+        private ArrayList<Date> activateTime;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            return inflater.inflate(R.layout.auto_fragment, container, false);
+        }
+
+
+
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+
+            super.onActivityCreated(savedInstanceState);
+
+
+
+            activateTime = new ArrayList<Date>();
+
+            for (int i = 0; i < userHero22.getAutoInvokeTimes().size(); i++) {
+             //  Date items = userHero22.getAutoInvokeTimes().get(i);
+                Date items = new Date();
+                activateTime.add(items);
+                activateTime.add(items);
+
+            }
+
+            adapterTime = new autoAdapter(getActivity(), activateTime);
+            setListAdapter(adapterTime);
+            //getListView().setOnItemClickListener(this);
+
+            System.out.println("date pls " + adapterTime.toString());
+
+
+        }
+
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+    }
+    public static emergencyAdapter adapterEm;
+    public static class emergencyContactDetails  extends ListFragment {
+
+
+        private ArrayList<String> smsList;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            return inflater.inflate(R.layout.emergency_fragment, container, false);
+        }
+
+        public void onActivityCreated(Bundle savedInstanceState) {
+
+            super.onActivityCreated(savedInstanceState);
+
+        smsList = userHero22.getSMSList();
+       // smsList.add("0876140810");
+            adapterEm = new emergencyAdapter(getActivity(), smsList);
+            setListAdapter(adapterEm);
+
+
+            Button more = (Button) getActivity().findViewById(R.id.button);
+            more.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), addPhoneNumber.class);
+                    startActivityForResult(intent, ADD_TODO_ITEM_REQUEST);
+                }
+            });
+
+
+        }
+    }
+
+            public static class shakeInvokeDeviceFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -499,15 +652,15 @@ public class MainActivity extends Activity {
 
                     if(isChecked){
                         userHero22.setShackInvoke(true);
-                        userHero22 =  new userSetting(true,80,null,false,1,"0876140810",null,null);
+                       // ArrayList<Date> times =  new ArrayList<Date>();
+                       // times.add(new Date());
+                       // userHero22 =  new userSetting(true,80,times,false,1,"0876140810",null,null);
                     }else{
                         userHero22.setShackInvoke(false);
-                        userHero22 =  new userSetting(false,80,null,false,1,"0876140810",null,null);
+                     //   userHero22 =  new userSetting(false,80,null,false,1,"0876140810",null,null);
                     }
-                    json = gson.toJson(userHero22);
-                    editor.putString("userHero22", json);
-                    editor.apply();
 
+                    saveObject();
                     System.out.println(userHero22.toString()+"asdasdasdasd");
 
 
@@ -567,29 +720,203 @@ public class MainActivity extends Activity {
 
     }
 
-    public static class ChangePasword extends Fragment {
+    public static class ChangePasword extends Fragment implements View.OnClickListener {
+        int counter = 0;
+        TextView passwordone = null;
+        TextView passwordtwo = null;
+        TextView passwordthree = null;
+        TextView passwordfour = null;
+        TextView msg = null;
+        boolean newPasswordOrNot = true;
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+
+            counter = 0;
             // Inflate the layout for this fragment
             return inflater.inflate(R.layout.password, container, false);
         }
+
+        public void onActivityCreated(Bundle savedInstanceState) {
+
+            super.onActivityCreated(savedInstanceState);
+
+
+            msg = (TextView) getActivity().findViewById(R.id.message);
+
+             passwordone = (TextView) getActivity().findViewById(R.id.passwordone);
+             passwordtwo = (TextView) getActivity().findViewById(R.id.passwordteo);
+             passwordthree = (TextView) getActivity().findViewById(R.id.paswordthree);
+             passwordfour = (TextView) getActivity().findViewById(R.id.paswordfour);
+
+
+            if (userHero22.getPassword().equals("no password")) {
+                msg.setText("please insert a new password");
+                newPasswordOrNot = true;
+            }
+            else{
+                msg.setText("please insert current password");
+                newPasswordOrNot = false;
+            }
+
+            final Button buttonNumber1 = (Button) getActivity().findViewById(R.id.one);
+            final Button buttonNumber2 = (Button) getActivity().findViewById(R.id.two);
+            final Button buttonNumber3 = (Button) getActivity().findViewById(R.id.three);
+            final Button buttonNumber4 = (Button) getActivity().findViewById(R.id.four);
+            final Button buttonNumber5 = (Button) getActivity().findViewById(R.id.five);
+            final Button buttonNumber6 = (Button) getActivity().findViewById(R.id.six);
+            final Button buttonNumber7 = (Button) getActivity().findViewById(R.id.seven);
+            final Button buttonNumber8 = (Button) getActivity().findViewById(R.id.eight);
+            final Button buttonNumber9 = (Button) getActivity().findViewById(R.id.nine);
+            final Button buttonNumber0 = (Button) getActivity().findViewById(R.id.zero);
+            final Button buttonNumberD = (Button) getActivity().findViewById(R.id.delbutton);
+            final Button buttonNumberGo = (Button) getActivity().findViewById(R.id.okbutton);
+
+            buttonNumber1.setOnClickListener(this);
+            buttonNumber2.setOnClickListener(this);
+            buttonNumber3.setOnClickListener(this);
+            buttonNumber4.setOnClickListener(this);
+            buttonNumber5.setOnClickListener(this);
+            buttonNumber6.setOnClickListener(this);
+            buttonNumber7.setOnClickListener(this);
+            buttonNumber8.setOnClickListener(this);
+            buttonNumber9.setOnClickListener(this);
+            buttonNumber0.setOnClickListener(this);
+            buttonNumberD.setOnClickListener(this);
+            buttonNumberGo.setOnClickListener(this);
+
+
+        }
+
+
+        public void insertPasswordIntoTextView(String number) {
+
+            if (!(counter > 4)) {
+
+                if (counter == 0) {
+
+                    passwordone.setText(number);
+                } else if (counter == 1) {
+
+                    passwordtwo.setText(number);
+                } else if (counter == 2) {
+
+                    passwordthree.setText(number);
+                } else if (counter == 3) {
+
+                    passwordfour.setText(number);
+                }
+                counter++;
+            }
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.one:
+                    // do stuff;
+                    insertPasswordIntoTextView("1");
+                    break;
+                case R.id.two:
+                    // do stuff;
+                    insertPasswordIntoTextView("2");
+                    break;
+                case R.id.three:
+                    // do stuff;
+                    insertPasswordIntoTextView("3");
+                    break;
+                case R.id.four:
+                    // do stuff;
+                    insertPasswordIntoTextView("4");
+                    break;
+                case R.id.five:
+                    // do stuff;
+                    insertPasswordIntoTextView("5");
+                    break;
+                case R.id.six:
+                    // do stuff;
+                    insertPasswordIntoTextView("6");
+                    break;
+                case R.id.seven:
+                    // do stuff;
+                    insertPasswordIntoTextView("7");
+                    break;
+                case R.id.eight:
+                    // do stuff;
+                    insertPasswordIntoTextView("8");
+                    break;
+                case R.id.nine:
+                    // do stuff;
+                    insertPasswordIntoTextView("9");
+                    break;
+                case R.id.zero:
+                    // do stuff;
+                    insertPasswordIntoTextView("0");
+                    break;
+                case R.id.delbutton:
+                    // do stuff;
+                    counter=0;
+                    insertPasswordIntoTextView("");
+                    insertPasswordIntoTextView("");
+                    insertPasswordIntoTextView("");
+                    insertPasswordIntoTextView("");
+                    counter=0;
+
+                    break;
+                case R.id.okbutton:
+                    if(newPasswordOrNot==true){
+                        String temp = (String) passwordone.getText()+passwordtwo.getText()+passwordthree.getText()+passwordfour.getText();
+                        System.out.println("setting a new password" + temp);
+                        userHero22.setPassword(temp);
+                        saveObject();
+                        System.out.println("userHero: " + userHero22.toString());
+                        Toast.makeText(this.getActivity(),"password changed",Toast.LENGTH_SHORT).show();
+                        Fragment fragment = new Fragment1();
+
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                    }
+                    else{
+                        String temp = (String) passwordone.getText()+passwordtwo.getText()+passwordthree.getText()+passwordfour.getText();
+                        if(temp.equals(userHero22.getPassword())){
+                            newPasswordOrNot=true;
+                            msg.setText("insert a new password");
+                            counter=0;
+                            insertPasswordIntoTextView("");
+                            insertPasswordIntoTextView("");
+                            insertPasswordIntoTextView("");
+                            insertPasswordIntoTextView("");
+                            counter=0;
+                        }
+
+                    }
+
+
+
+                    break;
+            }
+        }
     }
 
-    /*public void saveObject(){
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(userHero);
-        editor.putString("userHero", json);
-        editor.commit();
+
+
+    public static void saveObject(){
+
+       json = gson.toJson(userHero22);
+                    editor.putString("userHero22", json);
+                    editor.apply();
 
     }
-
-    public void retriveObject(){
+/*
+    public static void retriveObject(){
 
         Gson gson = new Gson();
         String json = prefs.getString("userHero", "");
         userHero = gson.fromJson(json, userSetting.class);
-    }*/
+    }
+
+    */
 
 }

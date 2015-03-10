@@ -15,7 +15,7 @@
             android:layout_marginTop="10px"
             android:layout_marginLeft="10px"
             android:layout_marginRight="10px"
-            android:text="Help Center"
+            android:text="Instructions"
             android:drawableBottom="@drawable/bbb4"
             android:textColor="#b7b7b7"
             android:id="@+id/aboutUsFragmentTitle" />

@@ -14,7 +14,7 @@ public class userSetting implements Serializable {
     public int levelOfVibration;
     public ArrayList<Date> autoInvokeTimes;
     public boolean autoInvoke;
-    public int password;
+    public String password;
     public String policeNumber;
     public ArrayList<String> SMSList;
     public ArrayList<String> emailList;
@@ -24,13 +24,13 @@ public class userSetting implements Serializable {
         levelOfVibration = 50;
         autoInvokeTimes = new ArrayList<Date>();
         autoInvoke =false;
-        password = 1234;
+        password = "no password";
         policeNumber = "0429388400";
         SMSList = new ArrayList<String>();
         emailList = new ArrayList<String>();
     }
 
-    public userSetting(boolean shackInvoke, int levelOfVibration, ArrayList<Date> autoInvokeTimes, boolean autoInvoke, int password, String policeNumber, ArrayList<String> SMSList, ArrayList<String> emailList) {
+    public userSetting(boolean shackInvoke, int levelOfVibration, ArrayList<Date> autoInvokeTimes, boolean autoInvoke, String password, String policeNumber, ArrayList<String> SMSList, ArrayList<String> emailList) {
         this.shackInvoke = shackInvoke;
         this.levelOfVibration = levelOfVibration;
         this.autoInvokeTimes = autoInvokeTimes;
@@ -57,7 +57,7 @@ public class userSetting implements Serializable {
         return autoInvoke;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -89,7 +89,7 @@ public class userSetting implements Serializable {
         this.autoInvoke = autoInvoke;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -99,6 +99,11 @@ public class userSetting implements Serializable {
 
     public void setSMSList(ArrayList<String> SMSList) {
         this.SMSList = SMSList;
+    }
+
+    public void addSMSList(String number){
+        SMSList.add(number);
+
     }
 
     public void setEmailList(ArrayList<String> emailList) {

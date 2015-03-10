@@ -23,7 +23,15 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:icon="@drawable/icon"
@@ -31,31 +39,23 @@
         android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
-
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".splach"
-            android:label="@string/title_activity_splach" >
+            android:label="@string/title_activity_splach"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".addPhoneNumber"
+            android:label="@string/title_activity_add_phone_number" >
+        </activity>
     </application>
-
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
-
-
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
 
 </manifest>

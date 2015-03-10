@@ -49,42 +49,75 @@ public final class R {
         public static final int world=0x7f02001a;
     }
     public static final class id {
-        public static final int aboutUsFragment=0x7f080009;
-        public static final int aboutUsFragmentTitle=0x7f080008;
-        public static final int action_settings=0x7f080011;
-        public static final int action_websearch=0x7f080010;
-        public static final int content_frame=0x7f080001;
-        public static final int drawer_layout=0x7f080000;
-        public static final int icon=0x7f08000b;
-        public static final int image=0x7f08000a;
-        public static final int imageButton=0x7f080006;
-        public static final int imgLogo=0x7f080003;
-        public static final int left_drawer=0x7f080002;
-        public static final int seekBar=0x7f08000f;
-        public static final int switch1=0x7f08000d;
-        public static final int t1=0x7f080004;
-        public static final int t2=0x7f080005;
-        public static final int textView=0x7f080007;
-        public static final int textView2=0x7f08000e;
-        public static final int title=0x7f08000c;
+        public static final int RelativeLayout1=0x7f080007;
+        public static final int aboutUsFragment=0x7f080011;
+        public static final int aboutUsFragmentTitle=0x7f080010;
+        public static final int action_settings=0x7f08002a;
+        public static final int action_websearch=0x7f080029;
+        public static final int button=0x7f080006;
+        public static final int button2=0x7f08000a;
+        public static final int button3=0x7f080001;
+        public static final int content_frame=0x7f080003;
+        public static final int delbutton=0x7f080023;
+        public static final int drawer_layout=0x7f080002;
+        public static final int editText=0x7f080000;
+        public static final int eight=0x7f080021;
+        public static final int five=0x7f08001e;
+        public static final int four=0x7f08001d;
+        public static final int icon=0x7f080013;
+        public static final int image=0x7f080012;
+        public static final int imageButton=0x7f08000e;
+        public static final int imgLogo=0x7f080005;
+        public static final int left_drawer=0x7f080004;
+        public static final int message=0x7f080019;
+        public static final int nine=0x7f080022;
+        public static final int okbutton=0x7f080025;
+        public static final int one=0x7f08001a;
+        public static final int passwordone=0x7f080015;
+        public static final int passwordteo=0x7f080016;
+        public static final int paswordfour=0x7f080018;
+        public static final int paswordthree=0x7f080017;
+        public static final int seekBar=0x7f080028;
+        public static final int seven=0x7f080020;
+        public static final int six=0x7f08001f;
+        public static final int switch1=0x7f080026;
+        public static final int switch2=0x7f080009;
+        public static final int t1=0x7f08000c;
+        public static final int t2=0x7f08000d;
+        public static final int textView=0x7f08000f;
+        public static final int textView2=0x7f080027;
+        public static final int three=0x7f08001c;
+        public static final int title=0x7f080014;
+        public static final int titleViewSms=0x7f08000b;
+        public static final int titleViewTime=0x7f080008;
+        public static final int two=0x7f08001b;
+        public static final int zero=0x7f080024;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_splach=0x7f030001;
-        public static final int drawer_list_item=0x7f030002;
-        public static final int fragment_fragment0=0x7f030003;
-        public static final int fragment_fragment1=0x7f030004;
-        public static final int fragment_fragment2=0x7f030005;
-        public static final int fragment_fragment3=0x7f030006;
-        public static final int fragment_fragment4=0x7f030007;
-        public static final int fragment_planet=0x7f030008;
-        public static final int list_item=0x7f030009;
-        public static final int password=0x7f03000a;
-        public static final int shackfragment=0x7f03000b;
+        public static final int activity_add_phone_number=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int activity_splach=0x7f030002;
+        public static final int auto_fragment=0x7f030003;
+        public static final int autoactivate_layout=0x7f030004;
+        public static final int contact_fragment=0x7f030005;
+        public static final int drawer_list_item=0x7f030006;
+        public static final int emergency_fragment=0x7f030007;
+        public static final int emergency_layout=0x7f030008;
+        public static final int fragment_fragment0=0x7f030009;
+        public static final int fragment_fragment1=0x7f03000a;
+        public static final int fragment_fragment2=0x7f03000b;
+        public static final int fragment_fragment3=0x7f03000c;
+        public static final int fragment_fragment4=0x7f03000d;
+        public static final int fragment_planet=0x7f03000e;
+        public static final int list_item=0x7f03000f;
+        public static final int password=0x7f030010;
+        public static final int shackfragment=0x7f030011;
+        public static final int sms_remote_access_fragment=0x7f030012;
     }
     public static final class menu {
         public static final int main=0x7f070000;
-        public static final int menu_splach=0x7f070001;
+        public static final int menu_add_phone_number=0x7f070001;
+        public static final int menu_splach=0x7f070002;
     }
     public static final class string {
         public static final int action_settings=0x7f060000;
@@ -94,6 +127,7 @@ public final class R {
         public static final int drawer_close=0x7f060004;
         public static final int drawer_open=0x7f060005;
         public static final int hello_world=0x7f060006;
-        public static final int title_activity_splach=0x7f060007;
+        public static final int title_activity_add_phone_number=0x7f060007;
+        public static final int title_activity_splach=0x7f060008;
     }
 }

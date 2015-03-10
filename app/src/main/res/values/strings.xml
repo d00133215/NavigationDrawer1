@@ -20,7 +20,7 @@
         <item>MAIN</item>
         <item>App Settings</item>
         <item>Terms and Policies</item>
-        <item>Help Center</item>
+        <item>Instructions</item>
         <item>About</item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
@@ -39,7 +39,7 @@
         <item>Link to Social Network</item>
         <item>Emergency Contact details</item>
         <item>Contact police</item>
-        <item>Set Police number</item>
+        <item>SMS remote access</item>
         <item>About Us</item>
     </string-array>
 
@@ -54,4 +54,5 @@
         <item>@drawable/setppp</item>
         <item>@drawable/us</item>
     </array>
+    <string name="title_activity_add_phone_number">addPhoneNumber</string>
 </resources>
