@@ -2,20 +2,6 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\classes-1bbbd5c81127cf02b157b26d8066fc76108d362e.jar" />
-    </item>
-    <item
-        jar="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-19e073caa6bf8aa808ae26ba254c738698be3b8d.jar" />
-    </item>
-    <item
         jar="C:\Users\waihong\Desktop\NavigationDrawer1\app\src\main\res\gson-2.2.4.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -23,11 +9,32 @@
         <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\gson-2.2.4-4851f060fc535df54acc890baf08145635b2ac65.jar" />
     </item>
     <item
-        jar="C:\Users\waihong\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jar="C:\Users\waihong\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-4b6978f2d003441990b3b7ab0cbddfc763f1c36d.jar" />
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-6e55fe6aa7015f5494a1212d24cade0987086163.jar" />
+    </item>
+    <item
+        jar="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-c6e96868c0913bbe2924f49de4dcea78c8ac0e0a.jar" />
+    </item>
+    <item
+        jar="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\classes-774acc3abb848903fe9b8d1db900518333a28289.jar" />
+    </item>
+    <item
+        jar="C:\Users\waihong\.gradle\caches\modules-2\files-2.1\com.loopj.android\android-async-http\1.4.5\77bf7cacf9cefe19dc105e5425d2eb1bb5285881\android-async-http-1.4.5.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="77bf7cacf9cefe19dc105e5425d2eb1bb5285881">
+        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.5-2524fc5da48c77d44e7f4d9f7c415c30f9b3041a.jar" />
     </item>
 
 </items>

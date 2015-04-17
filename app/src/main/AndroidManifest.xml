@@ -23,8 +23,10 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -32,6 +34,16 @@
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="com.example.map.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:icon="@drawable/icon"
@@ -46,6 +58,62 @@
             android:name=".splach"
             android:label="@string/title_activity_splach"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".addPhoneNumber"
+            android:label="@string/title_activity_add_phone_number" >
+        </activity>
+        <activity
+            android:name=".changePoliceNumberActivity"
+            android:label="@string/title_activity_change_police_number" >
+        </activity>
+        <activity
+            android:name=".instructionActivity"
+            android:label="@string/title_activity_instruction" >
+        </activity>
+
+        <service
+            android:name="com.example.andriod.service.MyService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <receiver android:name="com.example.com.example.widget.help" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/help_info" />
+        </receiver>
+        <receiver
+            android:name="com.example.com.example.widget.SMSReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".launch"
+            android:label="@string/title_activity_launch" >
+        </activity>
+        <activity
+            android:name=".FullscreenTriggerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen_password"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name=".unlockActivity"
+            android:label="@string/title_activity_unlock" >
+        </activity>
+        <activity
+            android:name=".FullscreenActivityStrat"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="HELP"
+            android:theme="@style/FullscreenTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,8 +121,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".addPhoneNumber"
-            android:label="@string/title_activity_add_phone_number" >
+            android:name="com.example.com.example.News.ttss"
+            android:label="@string/title_activity_ttss" >
+        </activity>
+        <activity
+            android:name="com.example.com.example.News.NewActivity"
+            android:label="New Feeds" >
         </activity>
     </application>
 

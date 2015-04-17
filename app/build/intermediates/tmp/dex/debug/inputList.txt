@@ -1,5 +1,6 @@
 C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\classes\debug
-C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-4b6978f2d003441990b3b7ab0cbddfc763f1c36d.jar
+C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-6e55fe6aa7015f5494a1212d24cade0987086163.jar
+C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.5-2524fc5da48c77d44e7f4d9f7c415c30f9b3041a.jar
 C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\gson-2.2.4-4851f060fc535df54acc890baf08145635b2ac65.jar
-C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-19e073caa6bf8aa808ae26ba254c738698be3b8d.jar
-C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\classes-1bbbd5c81127cf02b157b26d8066fc76108d362e.jar
+C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-c6e96868c0913bbe2924f49de4dcea78c8ac0e0a.jar
+C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\classes-774acc3abb848903fe9b8d1db900518333a28289.jar

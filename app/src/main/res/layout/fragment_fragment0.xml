@@ -10,21 +10,24 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:layout_marginTop="10sp"
         android:layout_height="35dp"
         android:id="@+id/t1"
         android:layout_gravity="center_horizontal"
-        android:text="ALERT: your device isn&apos;t fully set up" />
+        android:textColor="@android:color/white"
+        android:text="ALERT: your device isn&apos;t fully set up: SMS list etc. " />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:id="@+id/t2"
+        android:textColor="@android:color/white"
         android:layout_gravity="center_horizontal"
-        android:text="ALERT: GPS location deactivated " />
+        android:text="recently action : none " />
 
     <ImageButton
         android:layout_width="match_parent"
-        android:layout_height="405dp"
+        android:layout_height="380dp"
         android:id="@+id/imageButton"
         android:scaleType="fitCenter"
         android:background="@null"
@@ -32,9 +35,19 @@
         android:onClick="helpPlease" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Your location is: ....."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="Your location is: unable to detect"
+        android:layout_gravity="left"
         android:id="@+id/textView" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        android:id="@+id/button4"
+        android:layout_gravity="right" />
 
 </LinearLayout>

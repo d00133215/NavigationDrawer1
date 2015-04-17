@@ -6,8 +6,9 @@
     <Switch
         android:layout_width="match_parent"
         android:layout_height="69dp"
-        android:text="Shack to Invoke device"
-        android:id="@+id/switch1" />
+        android:text="Detect to Invoke"
+        android:id="@+id/switch1"
+        android:checked="false" />
 
     <View
         android:layout_width="fill_parent"

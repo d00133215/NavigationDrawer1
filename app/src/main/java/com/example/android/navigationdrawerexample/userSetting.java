@@ -9,6 +9,10 @@ import java.util.Date;
  */
 public class userSetting implements Serializable {
 
+    public boolean callPolice ;
+    public boolean SMSRemote;
+    public String HelpMsgContent;
+    public boolean help;
 
     public boolean shackInvoke;
     public int levelOfVibration;
@@ -20,6 +24,7 @@ public class userSetting implements Serializable {
     public ArrayList<String> emailList;
 
     public userSetting(){
+        help=false;
         shackInvoke = true;
         levelOfVibration = 50;
         autoInvokeTimes = new ArrayList<Date>();
@@ -28,9 +33,14 @@ public class userSetting implements Serializable {
         policeNumber = "0429388400";
         SMSList = new ArrayList<String>();
         emailList = new ArrayList<String>();
+
+        HelpMsgContent = "Help please!";
+        callPolice = false;
+        SMSRemote=false;
     }
 
-    public userSetting(boolean shackInvoke, int levelOfVibration, ArrayList<Date> autoInvokeTimes, boolean autoInvoke, String password, String policeNumber, ArrayList<String> SMSList, ArrayList<String> emailList) {
+    public userSetting(boolean help, boolean shackInvoke, int levelOfVibration, ArrayList<Date> autoInvokeTimes, boolean autoInvoke, String password, String policeNumber, ArrayList<String> SMSList, ArrayList<String> emailList, boolean policeOnOff, boolean SMSRemote, String helpMsg) {
+        this.help = help;
         this.shackInvoke = shackInvoke;
         this.levelOfVibration = levelOfVibration;
         this.autoInvokeTimes = autoInvokeTimes;
@@ -39,6 +49,42 @@ public class userSetting implements Serializable {
         this.policeNumber = policeNumber;
         this.SMSList = SMSList;
         this.emailList = emailList;
+
+        this.callPolice = policeOnOff;
+        this.HelpMsgContent=helpMsg;
+        this.SMSRemote = SMSRemote;
+    }
+
+    public boolean isHelp() {
+        return help;
+    }
+
+    public void setHelp(boolean help) {
+        this.help = help;
+    }
+
+    public String getHelpMsgContent() {
+        return HelpMsgContent;
+    }
+
+    public void setHelpMsgContent(String helpMsgContent) {
+        HelpMsgContent = helpMsgContent;
+    }
+
+    public boolean isCallPolice() {
+        return callPolice;
+    }
+
+    public void setCallPolice(boolean callPolice) {
+        this.callPolice = callPolice;
+    }
+
+    public boolean isSMSRemote() {
+        return SMSRemote;
+    }
+
+    public void setSMSRemote(boolean SMSRemote) {
+        this.SMSRemote = SMSRemote;
     }
 
     public boolean isShackInvoke() {
@@ -113,11 +159,15 @@ public class userSetting implements Serializable {
     @Override
     public String toString() {
         return "userSetting{" +
-                "shackInvoke=" + shackInvoke +
+                "callPolice=" + callPolice +
+                ", SMSRemote=" + SMSRemote +
+                ", HelpMsgContent='" + HelpMsgContent + '\'' +
+                ", help=" + help +
+                ", shackInvoke=" + shackInvoke +
                 ", levelOfVibration=" + levelOfVibration +
                 ", autoInvokeTimes=" + autoInvokeTimes +
                 ", autoInvoke=" + autoInvoke +
-                ", password=" + password +
+                ", password='" + password + '\'' +
                 ", policeNumber='" + policeNumber + '\'' +
                 ", SMSList=" + SMSList +
                 ", emailList=" + emailList +

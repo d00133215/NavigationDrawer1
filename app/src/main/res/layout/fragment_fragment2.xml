@@ -10,15 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginTop="10px"
-            android:layout_marginLeft="10px"
-            android:layout_marginRight="10px"
-            android:text="Terms and Policies"
-            android:drawableBottom="@drawable/bbb4"
-            android:textColor="#b7b7b7"
-            android:id="@+id/aboutUsFragmentTitle" />
+
 
 
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"

@@ -18,6 +18,7 @@
     <string name="app_name">Helps Navigation</string>
     <string-array name="mm_array">
         <item>MAIN</item>
+        <item>Help News</item>
         <item>App Settings</item>
         <item>Terms and Policies</item>
         <item>Instructions</item>
@@ -27,18 +28,18 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
-    <string name="title_activity_splach">splach</string>
+    <string name="title_activity_splach">waihongs project</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
     <string-array name="titles">
-        <item>Shack Invoke device</item>
+        <item>Invoke by strong vibration</item>
         <item>Change Password</item>
-        <item>auto Activate</item>
-        <item>Link to Social Network</item>
-        <item>Emergency Contact details</item>
-        <item>Contact police</item>
+        <item>Help message content</item>
+        <item>Help Moments</item>
+        <item>SMS list</item>
+        <item>Emergency Contact Setting</item>
         <item>SMS remote access</item>
         <item>About Us</item>
     </string-array>
@@ -55,4 +56,17 @@
         <item>@drawable/us</item>
     </array>
     <string name="title_activity_add_phone_number">addPhoneNumber</string>
+    <string name="title_activity_change_police_number">changePoliceNumberActivity</string>
+    <string name="title_activity_instruction">instructionActivity</string>
+    <string name="appwidget_text">Help Hero</string>
+    <string name="add_widget">Add widget</string>
+    <string name="title_activity_launch">launch</string>
+
+    <string name="title_activity_fullscreen_password">FullscreenPasswordActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_unlock">unlockActivity</string>
+
+    <string name="title_activity_fullscreen_activity_strat">FullscreenActivityStrat</string>
+    <string name="title_activity_ttss">ttss</string>
 </resources>

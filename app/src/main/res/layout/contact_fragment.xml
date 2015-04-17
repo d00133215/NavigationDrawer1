@@ -7,10 +7,20 @@
     <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="auto contact police"
+        android:text="auto dial emergency number"
         android:id="@+id/switch2"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.19" />
+        android:layout_weight="0.19"
+        android:checked="false" />
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="auto send message"
+        android:id="@+id/switch3"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.19"
+        android:checked="false" />
 
     <Button
         android:layout_width="match_parent"

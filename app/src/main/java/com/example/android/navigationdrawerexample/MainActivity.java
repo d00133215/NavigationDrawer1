@@ -16,26 +16,44 @@
 
 package com.example.android.navigationdrawerexample;
 
+import com.example.andriod.service.MyService;
+import com.example.com.example.News.NewActivity;
+import com.example.com.example.News.ttss;
+import com.loopj.android.http.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.app.SearchManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Contacts;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,6 +66,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -56,6 +75,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
+
+import org.apache.http.Header;
 
 /**
  * This example illustrates a common usage of the DrawerLayout widget
@@ -88,6 +109,8 @@ public class MainActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    public static  AlertDialog.Builder alertDialogBuilder = null;
+    public static boolean onMainActivity = false;
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -101,23 +124,80 @@ public class MainActivity extends Activity {
     private static final int ADD_TODO_ITEM_REQUEST = 0;
 
 
+    public static locationGPS gpsTracker = null;
+    public static String identityNumber;
+
+    public static  SharedPreferences.Editor editor123 = null;
+    static final int PICK_CONTACT_REQUEST = 1;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        Intent serviceIntent = new Intent(this, MyService.class);
+        startService(serviceIntent);
 
-       // userHero =  new userSetting(true,80,null,false,1,"0876140810",null,null);
+        ActionBar bar = getActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#cca20f0b")));
+       // bar.setTitle(Html.fromHtml("<font>Wai's Paint </font>"));
+        alertDialogBuilder = new AlertDialog.Builder(this);
+
+        ///////
+        if(MyService.cancel==true) {
+            Intent intent = new Intent(this, unlockActivity.class);
+            startActivity(intent);
+        }
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
+        TelephonyManager telemamanger = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        String getSimSerialNumber = telemamanger.getSimSerialNumber();
+
+        identityNumber = getSimSerialNumber;
+
+        System.out.print("dasdasdas"+ identityNumber);
+
+
+///////////////////////////////////////////////////////////////////////////////////
+
+         gpsTracker = new locationGPS(this);
+
+        if (gpsTracker.canGetLocation())
+        {
+
+        }
+        else
+        {
+
+
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+
+            //gpsTracker.showSettingsAlert();
+
+        }
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+        // userHero =  new userSetting(true,80,null,false,1,"0876140810",null,null);
 
       //  System.out.println(userHero+"  asdasdasdasdasdasdasdasdas");
 
+        String MyPREFERENCES = "userSettingData" ;
+
+        //   System.out.println("abc+"+userHeroService);
+        SharedPreferences prefsqwe= getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
         final  SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        /*
+        /*MyPREFERENCES, Context.MODE_PRIVATE
         userHero.setShackInvoke(false);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
@@ -135,10 +215,43 @@ public class MainActivity extends Activity {
 
 */
 
-        json = prefs.getString("userHero22", "");
-        userHero22 = gson.fromJson(json, userSetting.class);
+     //   json = prefs.getString("userHero22", "");
+      //  userHero22 = gson.fromJson(json, userSetting.class);
+      //  System.out.println(userHero22+"  testing share prefrence");
+    //    editor = prefs.edit();
+
+        //
+
+
+
+        json = prefsqwe.getString("userHero22", "");
+      userHero22 = gson.fromJson(json, userSetting.class);
+     //  System.out.println(prefsqwe.getString("userHero22", "")+"  testing share prefrence");
+    //    System.out.println("old" + prefs.getString("userHero22", "")+"  testing share prefrence old");
+        editor123 = prefsqwe.edit();
+        editor= editor123;
+
+     //   json = gson.toJson(userHero22);
+    //    editor123.putString("userHero22", json);
+     //   editor123.apply();
+
         System.out.println(userHero22+"  testing share prefrence");
-        editor = prefs.edit();
+      /*
+        editor123.putString("key", "value");
+        editor123.commit();
+
+        json = gson.toJson(userHero22);
+        editor123.putString("userHero22", json);
+        editor123.apply();
+
+        System.out.println("testing123 " + prefsqwe.getString("userHero22",""));
+
+*/
+
+        //
+
+
+
         mTitle = mDrawerTitle = getTitle();
         mPlanetTitles = getResources().getStringArray(R.array.mm_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -183,24 +296,98 @@ public class MainActivity extends Activity {
 
 
 
-
-
-
-
-
     public void helpPlease(View view) {
-        String number = "23454568678";
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + number));
-        startActivity(intent);
-        sendSMS("5556", "Hi You got a message!");
 
+
+        ImageButton btn = (ImageButton)findViewById(R.id.imageButton);
+        TextView recentMsg = (TextView)findViewById(R.id.t2);
+
+        if(userHero22.isHelp()==false) {
+
+            recentMsg.setText("Recently activity : activated all help message send!");
+            btn.setImageResource(R.drawable.stopstop);
+            userHero22.setHelp(true);
+            saveObject();
+
+            String number = userHero22.getPoliceNumber();
+
+            if(userHero22.callPolice==true) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+            if(userHero22.autoInvoke==true) {
+                gpsTracker = new locationGPS(this);
+
+                String newMsg = userHero22.getHelpMsgContent() + "this is my identity number: " + identityNumber +" Lat: "+String.valueOf(gpsTracker.getLatitude())+" Log: "+String.valueOf(gpsTracker.getLongitude())
+                        +"msg send by Help App, trace user's location pls visit http://egocart.net/testing/waihongsiew/searchSite/ ";
+                for (int i = 0; i < userHero22.getSMSList().size(); i++) {
+                    sendSMS(userHero22.getSMSList().get(i), newMsg);
+                }
+            }
+
+
+            Date time = new Date();
+            postToServer(identityNumber, String.valueOf(gpsTracker.getLatitude()), String.valueOf(gpsTracker.getLongitude()),"true",time.toString());
+        }
+        else{
+            recentMsg.setText("Recently activity : none");
+            btn.setImageResource(R.drawable.hhh);
+            userHero22.setHelp(false);
+            saveObject();
+
+
+
+
+            // set title
+            alertDialogBuilder.setTitle("Do you want to send a msg to tell your friends you are fine now? ");
+
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage("Click yes to send!")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // if this button is clicked, close
+                                    // current activity
+                                    //remove(smsNumber.getText().toString());
+                                    String mm = "I am fine now. Don't worry";
+                                    for (int i = 0; i < userHero22.getSMSList().size(); i++) {
+                                        sendSMS(userHero22.getSMSList().get(i), mm);
+                                    }
+
+                                }
+                            })
+                    .setNegativeButton("No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    // if this button is clicked, just close
+                                    // the dialog box and do nothing
+                                    // dialog.cancel();
+                                }
+                            });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // show it
+            alertDialog.show();
+            System.out.println("sdfsdfsfsdf");
+
+
+            Date time = new Date();
+            postToServer(identityNumber, String.valueOf(gpsTracker.getLatitude()), String.valueOf(gpsTracker.getLongitude()),"false",time.toString());
+        }
 
     }
 
-    private void sendSMS(String phoneNumber, String message)
+    public static void sendSMS(String phoneNumber, String message)
     {
+
         SmsManager sms = SmsManager.getDefault();
+
         sms.sendTextMessage(phoneNumber, null, message, null, null);
         System.out.println("sending a text");
     }
@@ -262,27 +449,36 @@ public class MainActivity extends Activity {
         args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
         fragment.setArguments(args);
  */
-        Fragment fragment = null;
+        Fragment fragment =new Fragment0();
+
+
 
         if(position==0){
              fragment = new Fragment0();
 
         }
-        else if(position==1){
-            fragment = new Fragment1();
-
+        if(position==1){
+            Intent i = new Intent(this, ttss.class);
+            startActivity(i);
+            MainActivity.onMainActivity=false;
         }
         else if(position==2){
-            fragment = new Fragment2();
-
+          //  Intent intent = new Intent(this, unlockActivity.class);
+          //  startActivity(intent);
+            fragment = new Fragment1();
+            MainActivity.onMainActivity=false;
         }
         else if(position==3){
-            fragment = new Fragment3();
-
+            fragment = new Fragment2();
+            MainActivity.onMainActivity=false;
         }
         else if(position==4){
+            fragment = new Fragment3();
+            MainActivity.onMainActivity=false;
+        }
+        else if(position==5){
             fragment = new Fragment4();
-
+            MainActivity.onMainActivity=false;
         }
 
 
@@ -357,6 +553,60 @@ public class MainActivity extends Activity {
             // Inflate the layout for this fragment
 
             return inflater.inflate(R.layout.fragment_fragment0, container, false);
+        }
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+
+            super.onActivityCreated(savedInstanceState);
+            if (!(userHero22.getSMSList().size() == 0)) {
+                TextView alertMsg = (TextView) getActivity().findViewById(R.id.t1);
+
+                alertMsg.setText("Your device is fully set up");
+            }
+            TextView recentMsg = (TextView) getActivity().findViewById(R.id.t2);
+            ImageButton btn = (ImageButton)getActivity().findViewById(R.id.imageButton);
+
+            if(userHero22.isHelp()==true){
+                recentMsg.setText("recently action : activated all help message send");
+                btn.setImageResource(R.drawable.stopstop);
+
+
+
+
+            }
+            else
+            {
+                recentMsg .setText("recently action : none");
+                btn.setImageResource(R.drawable.hhh);
+            }
+
+            onMainActivity=true;  // for the location textview in locationGPS class
+
+            TextView locaton = (TextView) getActivity().findViewById(R.id.textView);
+            if(!(gpsTracker ==null)){
+
+
+                locaton.setText("your location is : " + String.valueOf(gpsTracker.getLatitude()) +" " + String.valueOf(gpsTracker.getLongitude()));
+            }
+            Button bt1 = (Button) getActivity().findViewById(R.id.button4);
+            if(locaton.getText().toString().equals("your location is : 0.0 0.0")){
+                bt1.setVisibility(View.VISIBLE);
+            }
+            else{
+                bt1.setVisibility(View.GONE);
+            }
+            bt1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //when play is clicked show stop button and hide play button
+                    getActivity().finish();
+                    startActivity(getActivity().getIntent());
+
+                }
+            });
+
+
         }
 
     }
@@ -448,10 +698,19 @@ public class MainActivity extends Activity {
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
             }
             if(position==2){
-                Fragment fragment = new autoactivateTime();
+                Fragment fragment = new messageFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
+            }
+            if(position == 3){
+
+                Intent i = new Intent(getActivity(), ttss.class);
+                startActivity(i);
+
+            //    Fragment fragment = new NewFeedsFragment();
+              //  FragmentManager fragmentManager = getFragmentManager();
+              //  fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
             }
 
             if(position ==4){
@@ -492,6 +751,53 @@ public class MainActivity extends Activity {
             return inflater.inflate(R.layout.sms_remote_access_fragment, container, false);
         }
 
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+
+            super.onActivityCreated(savedInstanceState);
+
+            TextView switchStatus;
+            Switch mySwitch;
+
+            switchStatus = (TextView) getActivity().findViewById(R.id.switch2);
+            mySwitch = (Switch) getActivity().findViewById(R.id.switch2);
+
+
+            mySwitch.setChecked(userHero22.isSMSRemote());
+
+            mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView,
+                                             boolean isChecked) {
+
+                    if(isChecked){
+                        userHero22.setSMSRemote(true);
+                    }else{
+                        userHero22.setSMSRemote(false);
+                    }
+
+                    saveObject();
+                    System.out.println(userHero22.toString()+"new object value");
+
+
+
+                }
+            });
+
+            final Button button = (Button) getActivity().findViewById(R.id.button2);
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(getActivity(), instructionActivity.class);
+                    startActivityForResult(intent, ADD_TODO_ITEM_REQUEST);
+                }
+            });
+
+        }
+
+
     }
 
     public static class contactPoliceFragment extends Fragment{
@@ -501,6 +807,73 @@ public class MainActivity extends Activity {
             // Inflate the layout for this fragment
             return inflater.inflate(R.layout.contact_fragment, container, false);
         }
+
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+
+            super.onActivityCreated(savedInstanceState);
+            TextView switchStatus;
+            Switch mySwitch;
+            TextView switchStatus3;
+            Switch mySwitch3;
+
+            switchStatus = (TextView) getActivity().findViewById(R.id.switch2);
+            mySwitch = (Switch) getActivity().findViewById(R.id.switch2);
+
+            switchStatus3 = (TextView) getActivity().findViewById(R.id.switch3);
+            mySwitch3 = (Switch) getActivity().findViewById(R.id.switch3);
+
+            mySwitch.setChecked(userHero22.isCallPolice());
+            mySwitch3.setChecked(userHero22.isAutoInvoke());
+
+            mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView,
+                                             boolean isChecked) {
+
+                    if(isChecked){
+                        userHero22.setCallPolice(true);
+                    }else{
+                        userHero22.setCallPolice(false);
+                    }
+
+                    saveObject();
+                    System.out.println(userHero22.toString()+"new object value");
+                }
+            });
+            mySwitch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView,
+                                             boolean isChecked) {
+
+                    if(isChecked){
+                        userHero22.setAutoInvoke(true);
+                    }else{
+                        userHero22.setAutoInvoke(false);
+                    }
+
+                    saveObject();
+                    System.out.println(userHero22.toString()+"new object value");
+                }
+            });
+
+            final Button button = (Button) getActivity().findViewById(R.id.button2);
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(getActivity(), changePoliceNumberActivity.class);
+                    startActivityForResult(intent, ADD_TODO_ITEM_REQUEST);
+                }
+            });
+
+
+
+
+        }
+
 
     }
     public static class Fragment3 extends Fragment {
@@ -540,52 +913,47 @@ public class MainActivity extends Activity {
         }
     }
 
-    public static class autoactivateTime extends ListFragment implements AdapterView.OnItemClickListener {
+    public static class messageFragment extends Fragment  {
 
-        autoAdapter adapterTime;
-        private ArrayList<Date> activateTime;
+
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
-            return inflater.inflate(R.layout.auto_fragment, container, false);
+            return inflater.inflate(R.layout.message_content_fragment, container, false);
         }
 
 
 
+        public static String content = "";
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
 
             super.onActivityCreated(savedInstanceState);
 
+            final EditText editText = (EditText)getActivity().findViewById(R.id.editTextmsg);
+            editText.setText( MainActivity.userHero22.getHelpMsgContent(), TextView.BufferType.EDITABLE);
+
+            content = editText.getText().toString();
+
+            System.out.println("message details : " + content);
 
 
-            activateTime = new ArrayList<Date>();
 
-            for (int i = 0; i < userHero22.getAutoInvokeTimes().size(); i++) {
-             //  Date items = userHero22.getAutoInvokeTimes().get(i);
-                Date items = new Date();
-                activateTime.add(items);
-                activateTime.add(items);
+            final Button button = (Button) getActivity().findViewById(R.id.button5);
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    MainActivity.userHero22.setHelpMsgContent(editText.getText().toString());
+                    MainActivity.saveObject();
 
-            }
-
-            adapterTime = new autoAdapter(getActivity(), activateTime);
-            setListAdapter(adapterTime);
-            //getListView().setOnItemClickListener(this);
-
-            System.out.println("date pls " + adapterTime.toString());
+                }
+            });
 
 
         }
 
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        }
     }
     public static emergencyAdapter adapterEm;
     public static class emergencyContactDetails  extends ListFragment {
@@ -618,10 +986,59 @@ public class MainActivity extends Activity {
                     startActivityForResult(intent, ADD_TODO_ITEM_REQUEST);
                 }
             });
+            Button get = (Button) getActivity().findViewById(R.id.button2);
+            get.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
+                    pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
+                    startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
+                }
+            });
+
+
 
 
         }
+
+        @Override
+        public void onActivityResult(int reqCode, int resultCode, Intent data) {
+
+            System.out.println("qweqweqeqweqeqeq");
+            // Check which request it is that we're responding to
+            if (reqCode == PICK_CONTACT_REQUEST) {
+                // Make sure the request was successful
+                if (resultCode == RESULT_OK) {
+                    // Get the URI that points to the selected contact
+                    Uri contactUri = data.getData();
+                    // We only need the NUMBER column, because there will be only one row in the result
+                    String[] projection = {ContactsContract.CommonDataKinds.Phone.NUMBER};
+
+                    // Perform the query on the contact to get the NUMBER column
+                    // We don't need a selection or sort order (there's only one result for the given URI)
+                    // CAUTION: The query() method should be called from a separate thread to avoid blocking
+                    // your app's UI thread. (For simplicity of the sample, this code doesn't do that.)
+                    // Consider using CursorLoader to perform the query.
+                    Cursor cursor = getActivity().getContentResolver().query(contactUri, projection, null, null, null);
+                    cursor.moveToFirst();
+
+                    // Retrieve the phone number from the NUMBER column
+                    int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                    String number = cursor.getString(column);
+
+                    // Do something with the phone number...
+
+
+
+                    MainActivity.adapterEm.add(number);
+                    MainActivity.saveObject();
+                }
+            }
+
+        }
     }
+
+
 
             public static class shakeInvokeDeviceFragment extends Fragment {
         @Override
@@ -903,10 +1320,12 @@ public class MainActivity extends Activity {
 
 
     public static void saveObject(){
-
+       //userHero22 = new userSetting();
        json = gson.toJson(userHero22);
                     editor.putString("userHero22", json);
                     editor.apply();
+
+
 
     }
 /*
@@ -918,5 +1337,108 @@ public class MainActivity extends Activity {
     }
 
     */
+
+    public static void postToServer(String number, String la, String lo, String OnOff, String time){
+
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        try {
+            //  HashMap<String, String> queryValues = new HashMap<String, String>();
+            // queryValues.put("userName", "testing");
+            // params.put("userName", queryValues.get("userName"));
+            //params.put("1", "test");
+            params.put("number", number);
+            params.put("latitude", la);
+            params.put("longitude", lo);
+            params.put("emgOnOff", OnOff);
+            params.put("happentime", time);
+
+            client.post("http://egocart.net/testing/waihongsiew/searchSite/wel.php", params, new AsyncHttpResponseHandler() {
+
+                @Override
+                public void onStart() {
+                    super.onStart();
+                }
+
+                @Override
+                public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+                                      Throwable arg3) {
+                    // TODO Auto-generated method stub
+                    // Toast.makeText(getApplicationContext(), "failure...!", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+                    // TODO Auto-generated method stub
+                    //  Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
+                }
+
+            });
+        } catch(Exception e) {
+            Log.d("MyApp", "File not found!!!");
+
+
+        }
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        onMainActivity = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onMainActivity = false;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        onMainActivity = false;
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        onMainActivity = false;
+    }
+
+    public static class NewFeedsFragment  extends Fragment {
+
+
+        private ArrayList<String> smsList;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            return inflater.inflate(R.layout.newfeedsfragment, container, false);
+        }
+
+        public void onActivityCreated(Bundle savedInstanceState) {
+
+            super.onActivityCreated(savedInstanceState);
+
+
+            Button bt = (Button) getActivity().findViewById(R.id.buttonM);
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                     Intent i = new Intent(getActivity(), NewActivity.class);
+                     startActivity(i);
+
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+    }
+
+
 
 }
