@@ -39,7 +39,7 @@ import com.google.gson.Gson;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MyService extends Service implements SensorListener, LocationListener {
-
+    public static float speed = 8000;
     SharedPreferences sharedpreferences;
     static SharedPreferences.Editor editor = null;
     public static boolean cancel = false;
@@ -125,7 +125,7 @@ public class MyService extends Service implements SensorListener, LocationListen
     public static float last_x;
     public static float last_y;
     public static float last_z;
-    private static final int SHAKE_THRESHOLD = 5000;
+    public static  int SHAKE_THRESHOLD = 6500;
 
     @Override
     public void onSensorChanged(int sensor, float[] values) {
@@ -144,7 +144,7 @@ public class MyService extends Service implements SensorListener, LocationListen
                 y = values[SensorManager.DATA_Y];
                 z = values[SensorManager.DATA_Z];
 
-                float speed = Math.abs(x+y+z - last_x -last_y-last_z) / diffTime * 10000;
+                speed = Math.abs(x+y+z - last_x -last_y-last_z) / diffTime * 10000;
 
 
 
@@ -159,7 +159,8 @@ public class MyService extends Service implements SensorListener, LocationListen
                 userHeroService = gsonService.fromJson(jsonService, userSetting.class);
                 editor = sharedpreferences.edit();
 
-
+                SHAKE_THRESHOLD = userHeroService.getLevelOfVibration();
+               // System.out.println(SHAKE_THRESHOLD);
     //System.out.println("FullscreenTriggerActivity.TrigerActivityOpen: " +FullscreenTriggerActivity.TrigerActivityOpen);
         //        System.out.println("MainActivity.userHero22.isHelp()"+FullscreenTriggerActivity.funtionOpen);
                 if (speed > SHAKE_THRESHOLD && FullscreenTriggerActivity.TrigerActivityOpen == false

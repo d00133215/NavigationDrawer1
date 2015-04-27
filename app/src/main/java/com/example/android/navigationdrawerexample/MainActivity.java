@@ -137,8 +137,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent serviceIntent = new Intent(this, MyService.class);
-        startService(serviceIntent);
+
 
         ActionBar bar = getActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#cca20f0b")));
@@ -226,6 +225,11 @@ public class MainActivity extends Activity {
 
         json = prefsqwe.getString("userHero22", "");
       userHero22 = gson.fromJson(json, userSetting.class);
+
+        if(userHero22==null){
+            userHero22 = new userSetting();
+            saveObject();
+        }
      //  System.out.println(prefsqwe.getString("userHero22", "")+"  testing share prefrence");
     //    System.out.println("old" + prefs.getString("userHero22", "")+"  testing share prefrence old");
         editor123 = prefsqwe.edit();
@@ -292,11 +296,14 @@ public class MainActivity extends Activity {
         if (savedInstanceState == null) {
             selectItem(0);
         }
+
+        Intent serviceIntent = new Intent(this, MyService.class);
+        startService(serviceIntent);
     }
 
 
 
-    public void helpPlease(View view) {
+    public  void help() {
 
 
         ImageButton btn = (ImageButton)findViewById(R.id.imageButton);
@@ -319,8 +326,12 @@ public class MainActivity extends Activity {
             if(userHero22.autoInvoke==true) {
                 gpsTracker = new locationGPS(this);
 
-                String newMsg = userHero22.getHelpMsgContent() + "this is my identity number: " + identityNumber +" Lat: "+String.valueOf(gpsTracker.getLatitude())+" Log: "+String.valueOf(gpsTracker.getLongitude())
-                        +"msg send by Help App, trace user's location pls visit http://egocart.net/testing/waihongsiew/searchSite/ ";
+                TelephonyManager telemamanger = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                String getSimSerialNumber = telemamanger.getSimSerialNumber();
+
+                String newMsg = userHero22.getHelpMsgContent() + " sim number is: " + getSimSerialNumber +" Lat: "+gpsTracker.getLatitude()+" Log: "+gpsTracker.getLongitude()
+                        +"to check activity pls visit http://egocart.net/testing/waihongsiew/searchSite/ ";
+                System.out.println("abc" + newMsg);
                 for (int i = 0; i < userHero22.getSMSList().size(); i++) {
                     sendSMS(userHero22.getSMSList().get(i), newMsg);
                 }
@@ -374,13 +385,17 @@ public class MainActivity extends Activity {
 
             // show it
             alertDialog.show();
-            System.out.println("sdfsdfsfsdf");
+            //System.out.println("sdfsdfsfsdf");
 
 
             Date time = new Date();
             postToServer(identityNumber, String.valueOf(gpsTracker.getLatitude()), String.valueOf(gpsTracker.getLongitude()),"false",time.toString());
         }
 
+    }
+
+    public void helpPlease(View view) {
+        Toast.makeText(this,"hold pls",Toast.LENGTH_SHORT).show();
     }
 
     public static void sendSMS(String phoneNumber, String message)
@@ -580,6 +595,98 @@ public class MainActivity extends Activity {
                 recentMsg .setText("recently action : none");
                 btn.setImageResource(R.drawable.hhh);
             }
+
+            btn.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    ImageButton btn = (ImageButton)getActivity().findViewById(R.id.imageButton);
+                    TextView recentMsg = (TextView)getActivity().findViewById(R.id.t2);
+
+                    if(userHero22.isHelp()==false) {
+
+                        recentMsg.setText("Recently activity : activated all help message send!");
+                        btn.setImageResource(R.drawable.stopstop);
+                        userHero22.setHelp(true);
+                        saveObject();
+
+                        String number = userHero22.getPoliceNumber();
+
+                        if(userHero22.callPolice==true) {
+                            Intent intent = new Intent(Intent.ACTION_CALL);
+                            intent.setData(Uri.parse("tel:" + number));
+                            startActivity(intent);
+                        }
+                        if(userHero22.autoInvoke==true) {
+                            gpsTracker = new locationGPS(getActivity());
+
+                            TelephonyManager telemamanger = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+                            String getSimSerialNumber = telemamanger.getSimSerialNumber();
+
+                            String newMsg = userHero22.getHelpMsgContent() + " sim number is: " + getSimSerialNumber +" Lat: "+gpsTracker.getLatitude()+" Log: "+gpsTracker.getLongitude()
+                                    +"to check activity pls visit http://egocart.net/testing/waihongsiew/searchSite/ ";
+                            System.out.println("abc" + newMsg);
+                            for (int i = 0; i < userHero22.getSMSList().size(); i++) {
+                                sendSMS(userHero22.getSMSList().get(i), newMsg);
+                            }
+                        }
+
+
+                        Date time = new Date();
+                        postToServer(identityNumber, String.valueOf(gpsTracker.getLatitude()), String.valueOf(gpsTracker.getLongitude()),"true",time.toString());
+                    }
+                    else{
+                        recentMsg.setText("Recently activity : none");
+                        btn.setImageResource(R.drawable.hhh);
+                        userHero22.setHelp(false);
+                        saveObject();
+
+
+
+
+                        // set title
+                        alertDialogBuilder.setTitle("Do you want to send a msg to tell your friends you are fine now? ");
+
+                        // set dialog message
+                        alertDialogBuilder
+                                .setMessage("Click yes to send!")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                // if this button is clicked, close
+                                                // current activity
+                                                //remove(smsNumber.getText().toString());
+                                                String mm = "I am fine now. Don't worry";
+                                                for (int i = 0; i < userHero22.getSMSList().size(); i++) {
+                                                    sendSMS(userHero22.getSMSList().get(i), mm);
+                                                }
+
+                                            }
+                                        })
+                                .setNegativeButton("No",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog,
+                                                                int id) {
+                                                // if this button is clicked, just close
+                                                // the dialog box and do nothing
+                                                // dialog.cancel();
+                                            }
+                                        });
+
+                        // create alert dialog
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+
+                        // show it
+                        alertDialog.show();
+                        //System.out.println("sdfsdfsfsdf");
+
+
+                        Date time = new Date();
+                        postToServer(identityNumber, String.valueOf(gpsTracker.getLatitude()), String.valueOf(gpsTracker.getLongitude()),"false",time.toString());
+                    }
+                    return true;
+                }
+            });
 
             onMainActivity=true;  // for the location textview in locationGPS class
 
@@ -1059,7 +1166,7 @@ public class MainActivity extends Activity {
             mySwitch = (Switch) getActivity().findViewById(R.id.switch1);
             mySwitch.setChecked(userHero22.isShackInvoke());
             seekBar = (SeekBar) getActivity().findViewById(R.id.seekBar);
-            seekBar.setProgress(userHero22.getLevelOfVibration());
+            seekBar.setProgress((userHero22.getLevelOfVibration()-6000)/40);
 
             mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -1095,7 +1202,8 @@ public class MainActivity extends Activity {
 
                 public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
 
-                    progress = progresValue;
+                    progress = (progresValue*40)+6000;
+
 
 
                 }
@@ -1120,8 +1228,10 @@ public class MainActivity extends Activity {
                     json = gson.toJson(userHero22);
                     editor.putString("userHero22", json);
                     editor.apply();
+                    MyService.SHAKE_THRESHOLD =userHero22.getLevelOfVibration();
 
                 }
+
 
 
             });

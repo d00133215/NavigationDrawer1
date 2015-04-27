@@ -26,11 +26,11 @@ public class userSetting implements Serializable {
     public userSetting(){
         help=false;
         shackInvoke = true;
-        levelOfVibration = 50;
+        levelOfVibration = 6500;
         autoInvokeTimes = new ArrayList<Date>();
         autoInvoke =false;
         password = "no password";
-        policeNumber = "0429388400";
+        policeNumber = "0876140810";
         SMSList = new ArrayList<String>();
         emailList = new ArrayList<String>();
 
