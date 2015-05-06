@@ -6,7 +6,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.android.navigationdrawerexample.instructionActivity">
 
-    <TextView android:text="Instruction : " android:layout_width="wrap_content"
+    <TextView android:text="Instruction : in order to get user location by SMS, the SMS must content the keyword of find and a password that set by user. user are also allow to deactivate or activate the application remotely by using the keyword of activate and password for activate the application, the keyword of cancel and password for deactivate." android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>

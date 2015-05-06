@@ -18,7 +18,7 @@
             android:layout_marginLeft="10px"
             android:layout_marginRight="10px"
             android:id="@+id/aboutUsFragment"
-            android:text="instruction of using this app is........."/>
+            android:text="In order to use the application, user have to turn on the GPS and set up the emergency contacts and apps setting, to allow system notify emergency contacts If necessary "/>
 
     </LinearLayout>
 </ScrollView>

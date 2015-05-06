@@ -225,15 +225,18 @@ public class MainActivity extends Activity {
 
         json = prefsqwe.getString("userHero22", "");
       userHero22 = gson.fromJson(json, userSetting.class);
-
-        if(userHero22==null){
-            userHero22 = new userSetting();
-            saveObject();
-        }
-     //  System.out.println(prefsqwe.getString("userHero22", "")+"  testing share prefrence");
-    //    System.out.println("old" + prefs.getString("userHero22", "")+"  testing share prefrence old");
         editor123 = prefsqwe.edit();
         editor= editor123;
+        if(json.equals("")){
+            userHero22 = new userSetting();
+            saveObject();
+            //Toast.makeText(this,"createing nre object",Toast.LENGTH_LONG).show();
+
+        }
+        //Toast.makeText(this,"not creating nre object",Toast.LENGTH_LONG).show();
+     //  System.out.println(prefsqwe.getString("userHero22", "")+"  testing share prefrence");
+    //    System.out.println("old" + prefs.getString("userHero22", "")+"  testing share prefrence old");
+
 
      //   json = gson.toJson(userHero22);
     //    editor123.putString("userHero22", json);
@@ -330,7 +333,7 @@ public class MainActivity extends Activity {
                 String getSimSerialNumber = telemamanger.getSimSerialNumber();
 
                 String newMsg = userHero22.getHelpMsgContent() + " sim number is: " + getSimSerialNumber +" Lat: "+gpsTracker.getLatitude()+" Log: "+gpsTracker.getLongitude()
-                        +"to check activity pls visit http://egocart.net/testing/waihongsiew/searchSite/ ";
+                        +"to check activity pls visit";
                 System.out.println("abc" + newMsg);
                 for (int i = 0; i < userHero22.getSMSList().size(); i++) {
                     sendSMS(userHero22.getSMSList().get(i), newMsg);
@@ -1185,7 +1188,7 @@ public class MainActivity extends Activity {
                     }
 
                     saveObject();
-                    System.out.println(userHero22.toString()+"asdasdasdasd");
+
 
 
 
@@ -1235,6 +1238,8 @@ public class MainActivity extends Activity {
 
 
             });
+
+            System.out.println("level:" + userHero22.getLevelOfVibration());
 
 
         }

@@ -9,18 +9,18 @@
         <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\gson-2.2.4-4851f060fc535df54acc890baf08145635b2ac65.jar" />
     </item>
     <item
-        jar="C:\Users\waihong\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-6e55fe6aa7015f5494a1212d24cade0987086163.jar" />
-    </item>
-    <item
         jar="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
         <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-c6e96868c0913bbe2924f49de4dcea78c8ac0e0a.jar" />
+    </item>
+    <item
+        jar="C:\Users\waihong\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-6e55fe6aa7015f5494a1212d24cade0987086163.jar" />
     </item>
     <item
         jar="C:\Users\waihong\Desktop\NavigationDrawer1\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"

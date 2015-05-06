@@ -56,7 +56,7 @@ public class SMSReceiver extends BroadcastReceiver {
                                 gpsTracker.getLocality(context) + " " + MainActivity.gpsTracker.getCountryName(context) + " " +
                                 MainActivity.gpsTracker.getPostalCode(context) + " Lat: " +MainActivity.gpsTracker.getLatitude()+" Long: " +
                                 MainActivity.gpsTracker.getLongitude()+
-                                " sim number is: "+ getSimSerialNumber + " to check activity pls visit http://egocart.net/testing/waihongsiew/searchSite/ ";
+                                " sim number: "+ getSimSerialNumber ;
 
                         SmsManager sms = SmsManager.getDefault();
                         sms.sendTextMessage(senderNum, null, locationaddress, null, null);
@@ -66,11 +66,14 @@ public class SMSReceiver extends BroadcastReceiver {
                       //  Toast toast = Toast.makeText(context,
                       //          "senderNum: "+ senderNum + ", message: " + message + "location: " + locationaddress, duration);
                       //  toast.show();
+                        Toast toast = Toast.makeText(context,
+                                "SMS", duration);
+                        toast.show();
                     }
                     if(message.contains("activate") && message.contains(MyService.userHeroService.getPassword()) && MyService.userHeroService.isSMSRemote()==true) {
                         int duration = Toast.LENGTH_LONG;
                         Toast toast = Toast.makeText(context,
-                                "function close", duration);
+                                "Help function open", duration);
                         toast.show();
                         MyService.userHeroService.setHelp(true);
                         MyService.saveObject();
@@ -78,7 +81,7 @@ public class SMSReceiver extends BroadcastReceiver {
                     if(message.contains("cancel") && message.contains(MyService.userHeroService.getPassword()) && MyService.userHeroService.isSMSRemote()==true) {
                         int duration = Toast.LENGTH_LONG;
                         Toast toast = Toast.makeText(context,
-                                "function open", duration);
+                                "Help function close", duration);
                         toast.show();
                         MyService.userHeroService.setHelp(false);
                         MyService.saveObject();
