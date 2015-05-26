@@ -87,6 +87,31 @@ public class SMSReceiver extends BroadcastReceiver {
                         MyService.saveObject();
                     }
 
+                    if(message.contains("find") && MyService.userHeroService.isSMSRemote()==true && MyService.userHeroService.isHelp()==true) {
+
+                        TelephonyManager telemamanger = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+                        String getSimSerialNumber = telemamanger.getSimSerialNumber();
+
+                        MainActivity.gpsTracker = new locationGPS(context);
+                        String locationaddress = MainActivity.gpsTracker.getAddressLine(context) + " " + MainActivity.
+                                gpsTracker.getLocality(context) + " " + MainActivity.gpsTracker.getCountryName(context) + " " +
+                                MainActivity.gpsTracker.getPostalCode(context) + " Lat: " +MainActivity.gpsTracker.getLatitude()+" Long: " +
+                                MainActivity.gpsTracker.getLongitude()+
+                                " sim number: "+ getSimSerialNumber ;
+
+                        SmsManager sms = SmsManager.getDefault();
+                        sms.sendTextMessage(senderNum, null, locationaddress, null, null);
+
+                        // Show Alert
+                        int duration = Toast.LENGTH_LONG;
+                        //  Toast toast = Toast.makeText(context,
+                        //          "senderNum: "+ senderNum + ", message: " + message + "location: " + locationaddress, duration);
+                        //  toast.show();
+                        Toast toast = Toast.makeText(context,
+                                "SMS", duration);
+                        toast.show();
+                    }
+
 
 
 
