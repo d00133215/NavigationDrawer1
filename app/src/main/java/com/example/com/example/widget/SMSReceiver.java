@@ -87,6 +87,7 @@ public class SMSReceiver extends BroadcastReceiver {
                         MyService.saveObject();
                     }
 
+
                     if(message.contains("find") && MyService.userHeroService.isSMSRemote()==true && MyService.userHeroService.isHelp()==true) {
 
                         TelephonyManager telemamanger = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
